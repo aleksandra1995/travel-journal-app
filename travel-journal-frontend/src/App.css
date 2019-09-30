@@ -62,9 +62,7 @@ background-color: #FBEEFB;
   box-sizing: border-box;
 }
 
-input {
-  /* opacity: .5; */
-}
+
 
 img {
   max-width: 100%;
@@ -306,4 +304,10 @@ padding-left: 22em;
 
 .text {
   font-size: 3em;
+}
+
+
+.placesToGo {
+  width: 30em;
+  margin-left: 30%;
 }

@@ -29,11 +29,11 @@ class PostContainer extends Component {
    }
 
    flipPage = () => {
-     if (this.state.xCoordinates < 300 ) {
+     if (this.state.xCoordinates < 157 ) {
         this.setState({
            bookClicked: this.state.bookClicked - 1
        })
-     } else if (this.state.xCoordinates > 400 ) { 
+     } else if (this.state.xCoordinates > 165 ) { 
         this.setState({
            bookClicked: this.state.bookClicked + 1
        })
@@ -122,6 +122,8 @@ class PostContainer extends Component {
 
     render() {
   
+      console.log(this.state.xCoordinates);
+      
       const orderedPages = this.props.currentBook.pages.sort((a,b) => {
         return a.id - b.id
       })
@@ -150,6 +152,7 @@ class PostContainer extends Component {
           })
         }
 
+        
         return (
     <div>
             

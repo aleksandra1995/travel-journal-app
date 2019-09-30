@@ -293,14 +293,8 @@ deleteChapter = (chapter) => {
   const leftoverUserChapters = this.state.user.chapters.filter(chap=> {    
     return chapter !== chap
   })
-  console.log(leftoverUserChapters)
 
-  console.log(this.state.user.chapters);
-  
-
-  
-
-  this.setState({user: {...this.state.user, chapters: leftoverUserChapters}})
+  this.setState({ user: {...this.state.user, chapters: leftoverUserChapters}})
   
 }
   

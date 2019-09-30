@@ -43,10 +43,6 @@ import Pin from '../img/pin.png'
 
     render() {
 
-        console.log(this.props);
-        
-        
-
         const userPins = this.state.pins.filter(pins => {
             return pins.user.id === this.props.user.id
         })
