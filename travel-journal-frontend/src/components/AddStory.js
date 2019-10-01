@@ -86,7 +86,7 @@ class NewPageForm extends Component {
                       </div>
                       <div class="page-num-4">
                         <div class="pages-content">
-                        <div> 
+                        <div className="addPage"> 
                                 <h1>
                                 {this.props.currentBook.location}
                                 </h1>  
