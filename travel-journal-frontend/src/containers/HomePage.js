@@ -43,7 +43,8 @@ class HomePage extends Component {
 
     goBack = () => {
         this.setState({
-            indCountryClicked: false
+            indCountryClicked: false,
+            search: ''
         })
     }
 

@@ -47,6 +47,12 @@ class Header extends Component {
             this.props.history.push('album')
         }else(alert("You must sign in to view your Album!"))
     }
+
+    addStoryButton = () => {
+        if (localStorage.token) {
+            this.props.history.push('addStory')
+        }else(alert("You must sign in to add a story!"))
+    }
     render() {
 
         
@@ -65,7 +71,7 @@ class Header extends Component {
                 }
                 
                     <button className="headeroriginalButton" onClick={this.goHome}>Home</button>
-                    <button className="headeroriginalButton" onClick={this.props.addStoryButton}>Add Story</button>
+                    <button className="headeroriginalButton" onClick={this.addStoryButton}>Add Story</button>
                     <button className="headeroriginalButton" onClick={this.handleSignOut}>Sign Out</button>
                     <button className="headeroriginalButton" onClick={this.handleGoToProfile}>Profile</button>
                     <button className="headeroriginalButton" onClick={this.handleGoToMap}>My Map</button>

@@ -354,3 +354,10 @@ opacity: .9;
   font-size: 2em;
   
 }
+
+.album-pics {
+  width: 20em;
+  height: 18em;
+  padding-right: 1em;
+  
+}
