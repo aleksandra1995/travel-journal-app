@@ -16,10 +16,6 @@ class Page extends Component {
 
         
         return (
-            // <div className="pageCard">
-            //     {this.props.title}
-            // </div>
-            
             <div className="indPageContent">
                 <img src={this.props.currentPage.url}/>
                 <h1>{this.props.title}</h1>

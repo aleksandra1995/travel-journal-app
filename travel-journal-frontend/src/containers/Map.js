@@ -56,6 +56,7 @@ import Pin from '../img/pin.png'
 
         
             <Header clearUser={this.props.clearUser} user={this.props.user}/>
+            <header className="countryInfo">Click on a Country on the Map to Tag a Place You have Traveled</header>
 
             <div onClick={this.mapClicked} className="mapContainer">
             <div>

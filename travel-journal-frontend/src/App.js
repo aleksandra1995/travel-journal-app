@@ -16,8 +16,10 @@ class App extends React.Component {
 
   state = {
     user: {
-      pins: []
+      pins: [],
+      chapters: []
     },
+    countries: [],
     chapters: [],
     newChapterCreated: false,
     currentBook: {
@@ -45,12 +47,10 @@ class App extends React.Component {
     .then(resp => resp.json())
     .then(chapters => this.setState({chapters})
     )
-
-
 }
 
 handleFileAddedToChapters = (e) => {
-  console.log("clicked from file added ");
+
   if (e.target.files[0]) {
     this.setState({imageChapter: e.target.files[0]})
 }
@@ -58,21 +58,21 @@ handleFileAddedToChapters = (e) => {
 
 handleUploadToChapters = (e) => {
   e.preventDefault()
-  console.log("clicked from ulpoad ");
 
   const {imageChapter} = this.state
-  const uploadTask = storage.ref(`images/${imageChapter.name}`).put(imageChapter)
-  uploadTask.on(`state_changed`, 
-  () => {},
-  () => {},
-  () => {
-      storage.ref('images').child(imageChapter.name).getDownloadURL().then(url => {
-        console.log(url);
-        
-          this.setState({ulrChapter: url})
-      })
-
-  })
+   
+  if (imageChapter) {
+    const uploadTask = storage.ref(`images/${imageChapter.name}`).put(imageChapter)
+    uploadTask.on(`state_changed`, 
+    () => {},
+    () => {},
+    () => {
+        storage.ref('images').child(imageChapter.name).getDownloadURL().then(url => {
+            this.setState({ulrChapter: url})
+        })
+        alert("Upload Successfull")
+    })
+  }else(alert("Please Choose a Photo First"))
   
 }
 
@@ -87,27 +87,31 @@ handleFileAdded = (e) => {
 handleUpload = (e) => {
   e.preventDefault()
   const {image} = this.state
-  const uploadTask = storage.ref(`images/${image.name}`).put(image)
-  uploadTask.on(`state_changed`, 
-  () => {},
-  () => {},
-  () => {
-      storage.ref('images').child(image.name).getDownloadURL().then(url => {
-          this.setState({url})
-          fetch(`http://localhost:3000/users/${this.state.user.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-          url: url
-        })
 
-      }).then(resp => resp.json())
-        .then(data => this.setState({user: {...this.state.user, url: data.url }}))
-          
-      })
-  })
+  if (image) {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image)
+    uploadTask.on(`state_changed`, 
+    () => {},
+    () => {},
+    () => {
+      
+        storage.ref('images').child(image.name).getDownloadURL().then(url => {
+            this.setState({url})
+            fetch(`http://localhost:3000/users/${this.state.user.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify({
+            url: url
+          })
+  
+        }).then(resp => resp.json())
+          .then(data => this.setState({user: {...this.state.user, url: data.url }}))
+          alert("Upload Successfull")
+        })
+    })
+  }else(alert("Please Choose a Photo First"))
   
 }
 
@@ -346,6 +350,7 @@ clearUser = () => {
       <Route 
       exact path={'/'} 
       render={routerProps => <HomePage 
+        countries={this.state.countries}
       user={this.state.user}
         clearUser={this.clearUser}
         addStoryButton={this.addStoryButton}
