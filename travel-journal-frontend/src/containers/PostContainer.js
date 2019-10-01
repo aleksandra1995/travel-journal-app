@@ -46,6 +46,7 @@ class PostContainer extends Component {
    }
 
    editPage = (pageInfo) => {
+     
     this.setState({editPageClicked: !this.state.editPageClicked, currentPage: pageInfo})
   
     
@@ -90,28 +91,30 @@ class PostContainer extends Component {
     handleUpload = (e) => {
       e.preventDefault()
       const {image} = this.state
-      const uploadTask = storage.ref(`images/${image.name}`).put(image)
-      uploadTask.on(`state_changed`, 
-      () => {},
-      () => {},
-      () => {
-          storage.ref('images').child(image.name).getDownloadURL().then(url => {
-              this.setState({url})
-              fetch(`http://localhost:3000/pages/${this.state.currentPage.id}`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-              url: url
+      if (image) {
+        const uploadTask = storage.ref(`images/${image.name}`).put(image)
+        uploadTask.on(`state_changed`, 
+        () => {},
+        () => {},
+        () => {
+            storage.ref('images').child(image.name).getDownloadURL().then(url => {
+                this.setState({url})
+                fetch(`http://localhost:3000/pages/${this.state.currentPage.id}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type':'application/json'
+              },
+              body: JSON.stringify({
+                url: url
+              })
+      
+            }).then(resp => resp.json())   
+            .then(data => this.setState({currentPage: data
+  
+            }))           
             })
-    
-          }).then(resp => resp.json())
-            .then(console.log
-            )
-              
-          })
-      })
+        })
+      }
       
     }
 
@@ -121,9 +124,6 @@ class PostContainer extends Component {
   
 
     render() {
-  
-      console.log(this.state.xCoordinates);
-      
       const orderedPages = this.props.currentBook.pages.sort((a,b) => {
         return a.id - b.id
       })
@@ -133,7 +133,7 @@ class PostContainer extends Component {
 
 
         const pages = indPage.map(page => {
-            return <Page currentPage={this.state.currentPage}editPage = {this.editPage} deletePage = {this.props.deletePage} key={page.id} {...page} />
+            return <Page currentPage={this.state.currentPage} editPage = {this.editPage} deletePage = {this.props.deletePage} key={page.id} {...page} />
             
         })
         let chapters

@@ -35,6 +35,18 @@ class Header extends Component {
             this.props.history.push('map')
         }else(alert("You must sign in to track the places you have traveled!"))  
     }
+
+    handleGoToView =() => {
+        if (localStorage.token) {
+            this.props.history.push('view')
+        }else(alert("You must sign in to view your Journal!"))
+    }
+
+    handleGoToAlbum = () => {
+        if (localStorage.token) {
+            this.props.history.push('album')
+        }else(alert("You must sign in to view your Album!"))
+    }
     render() {
 
         
@@ -57,6 +69,10 @@ class Header extends Component {
                     <button className="headeroriginalButton" onClick={this.handleSignOut}>Sign Out</button>
                     <button className="headeroriginalButton" onClick={this.handleGoToProfile}>Profile</button>
                     <button className="headeroriginalButton" onClick={this.handleGoToMap}>My Map</button>
+                    <button className="headeroriginalButton" onClick={this.handleGoToView}>My Journal</button>
+                    <button className="headeroriginalButton" onClick={this.handleGoToAlbum}>My Album</button>
+
+
 
                     
         

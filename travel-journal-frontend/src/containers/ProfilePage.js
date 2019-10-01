@@ -128,6 +128,7 @@ import Posts from '../components/Posts'
       </ul>
       <div className="profile">
             <img src={this.props.user.url}/>
+            {/* <video src={this.props.user.url} controls /> */}
             <h1>{this.props.user.first_name} {this.props.user.last_name} </h1>
             <h1>{this.props.user.email}</h1>
             <h1>{this.props.user.locations_traveled}</h1>

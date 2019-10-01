@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Posts from '../components/Posts'
 import Header from '../containers/Header'
+import {storage} from '../firebase'
+
 
 
 class NewPageForm extends Component {
@@ -9,8 +11,38 @@ class NewPageForm extends Component {
         location: '',
         date: '',
         title: '',
-        content: ''
+        content: '',
+        imagePage: null,
+        urlPage: ''
     }
+
+handleFileAddedToPages = (e) => {
+
+  if (e.target.files[0]) {
+    this.setState({imagePage: e.target.files[0]})
+}
+}
+
+handleUploadToPage = (e) => {
+  e.preventDefault()
+
+  const {imagePage} = this.state
+   
+  if (imagePage) {
+    const uploadTask = storage.ref(`images/${imagePage.name}`).put(imagePage)
+    uploadTask.on(`state_changed`, 
+    () => {},
+    () => {},
+    () => {
+        storage.ref('images').child(imagePage.name).getDownloadURL().then(url => {
+            this.setState({urlPage: url})
+        })
+        alert("Upload Successfull")
+    })
+  }else(alert("Please Choose a Photo First"))
+  
+}
+    
 
     handleOnChange= (e) => {
      this.setState({[e.target.name]: e.target.value})
@@ -41,6 +73,8 @@ class NewPageForm extends Component {
             }) 
         }   
       
+        console.log(this.state.urlPage);
+        
         
 
         return (
@@ -98,6 +132,8 @@ class NewPageForm extends Component {
                           <div class="content-inner2">
                               
                           { this.props.currentBook.location? <form className="newPage"onSubmit={this.handleFormSubmitForPage}>
+                              <input onChange={this.handleFileAddedToPages} type="file" />
+                              <button onClick={this.handleUploadToPage} >Upload</button>
                 <input value={this.state.title} onChange={this.handleOnChange} name="title" placeholder="title" type="text" />
                 <br></br>
                 <input value={this.state.date} onChange={this.handleOnChange} name='date' placeholder="date" type="text" />

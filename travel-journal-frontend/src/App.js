@@ -8,6 +8,7 @@ import AddStory from './components/AddStory';
 import PostContainer from './containers/PostContainer';
 import Map from './containers/Map'
 import {storage} from './firebase'
+import Album from './containers/Album';
 
 
 
@@ -17,7 +18,8 @@ class App extends React.Component {
   state = {
     user: {
       pins: [],
-      chapters: []
+      chapters: [],
+      pages: []
     },
     countries: [],
     chapters: [],
@@ -220,7 +222,8 @@ createNewPage = (pageInfo) => {
       content: pageInfo.content,
       date: pageInfo.date,
       user_id: this.state.user.id,
-      chapter_id: this.state.currentBook.id
+      chapter_id: this.state.currentBook.id,
+      url: pageInfo.urlPage
     
     })
   }).then(resp => resp.json())
@@ -416,6 +419,10 @@ clearUser = () => {
       {...routerProps}
       />}
       />
+      <Route path={'/album'}
+      render={routerProps => <Album 
+      {...routerProps}
+      user={this.state.user}/>}/>
     </Switch>
   );
 }

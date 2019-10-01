@@ -63,7 +63,7 @@ font-size: .5em;
 
 
 
-@import url('https://fonts.googleapis.com/css?family=Stalemate');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -77,7 +77,7 @@ body {
     background:  linear-gradient(
       rgba(255, 255, 255, 0.9), 
       rgba(255, 255, 255, 0.9)), url(https://s-media-cache-ak0.pinimg.com/originals/30/b3/a9/30b3a9b27032a6b9c1d7a69d2400fb9e.jpg);
-  font-family: 'Stalemate', cursive;
+  font-family: 'Indie Flower';
 }
 
 
