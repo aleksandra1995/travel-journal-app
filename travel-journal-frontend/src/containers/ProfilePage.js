@@ -80,10 +80,9 @@ import Posts from '../components/Posts'
     }   
 
 
-    console.log(this.props);
     
-    
-    
+   console.log(this.props.newUser);
+   
     return (
         <div className="Profile-Container">
             <Header 
@@ -97,10 +96,13 @@ import Posts from '../components/Posts'
          <div>
    
            
-      { this.state.editProfileClicked ?
+      { this.state.editProfileClicked || this.props.newUser ?
       <div className="editProfile"> 
+      <strong className="text">
+          Please fill out your Profile
+      </strong>
+
       <form onSubmit={this.handleSubmittedUpdateForm}>
-          
         <input onChange={this.props.handleFileAdded} type="file" />
         <br></br>
         <button onClick={this.props.handleUpload}>Upload</button>
@@ -128,13 +130,12 @@ import Posts from '../components/Posts'
       </ul>
       <div className="profile">
             <img src={this.props.user.url}/>
-            {/* <video src={this.props.user.url} controls /> */}
             <h1>{this.props.user.first_name} {this.props.user.last_name} </h1>
             <h1>{this.props.user.email}</h1>
             <h1>{this.props.user.locations_traveled}</h1>
             <h1>{this.props.user.bio}</h1>
             <button className="originalButton" onClick={this.editProfileClicked}>Edit Profile</button>
-
+            
             </div>
       </div>
             

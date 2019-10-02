@@ -361,3 +361,7 @@ opacity: .9;
   padding-right: 1em;
   
 }
+
+@media (max-width: 600px) {
+  
+}

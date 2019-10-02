@@ -30,7 +30,8 @@ class App extends React.Component {
     image: null,
     url: '',
     imageChapter: null,
-    ulrChapter: ''
+    ulrChapter: '',
+    newUser: false
   }
 
   componentDidMount() {
@@ -153,6 +154,7 @@ data = (data) => {
 
 signUserUp = (userInfo) => {
 
+  this.setState({newUser: true})
 fetch('http://localhost:3000/signup', {
   method: 'POST',
   headers: {
@@ -343,8 +345,10 @@ updatePageStateAfterEdit = (pageInfo) => {
 
 
 clearUser = () => {
-  this.setState({user: {},currentBook: {pages: []}})
+  this.setState({user: {},currentBook: {pages: []}, newUser: false })
 }
+
+
 
   render() {
  
@@ -365,6 +369,7 @@ clearUser = () => {
        <Route 
       exact path={'/profile'} 
       render={routerProps => <ProfilePage
+        newUser={this.state.newUser}
         handleUploadToChapters={this.handleUploadToChapters}
         handleFileAddedToChapters={this.handleFileAddedToChapters}
         editChapter={this.editChapter}
@@ -422,6 +427,7 @@ clearUser = () => {
       <Route path={'/album'}
       render={routerProps => <Album 
       {...routerProps}
+      clearUser={this.clearUser}
       user={this.state.user}/>}/>
     </Switch>
   );

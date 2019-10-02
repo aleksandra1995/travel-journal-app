@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :albums
   resources :countries
   resources :pages
   resources :chapters

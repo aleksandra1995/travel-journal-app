@@ -5,5 +5,6 @@ class UserSerializer < ActiveModel::Serializer
   has_many :chapters
   has_many :pages
   has_many :pins
+  has_many :albums
 
 end
