@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+
+import Button from 'react-bootstrap/Button'
+
 
 
 
@@ -58,31 +63,36 @@ class Header extends Component {
         
 
         return (
+            <Navbar bg="dark" variant="dark">
             <div className="header">
+                <Navbar.Text className="float-">
                 Welcome to Travel Journal
+                </Navbar.Text>
                 <br></br>
                 {localStorage.token ? 
                 this.props.user.first_name ?
-                `Hello ${this.props.user.first_name}`  
-                : `Hello ${this.props.user.username}`
+                <Navbar.Text>
+                    Hello {this.props.user.first_name} 
+                </Navbar.Text>
+                : <Navbar.Text>
+                    Hello {this.props.user.username}
+                </Navbar.Text>
                 : 
-                "Join in on a journey to memories"
-                
-                }
-                
-                    <button className="headeroriginalButton" onClick={this.goHome}>Home</button>
-                    <button className="headeroriginalButton" onClick={this.addStoryButton}>Add Story</button>
-                    <button className="headeroriginalButton" onClick={this.handleSignOut}>Sign Out</button>
-                    <button className="headeroriginalButton" onClick={this.handleGoToProfile}>Profile</button>
-                    <button className="headeroriginalButton" onClick={this.handleGoToMap}>My Map</button>
-                    <button className="headeroriginalButton" onClick={this.handleGoToView}>My Journal</button>
-                    <button className="headeroriginalButton" onClick={this.handleGoToAlbum}>My Album</button>
-
-
-
-                    
-        
+                <Navbar.Text>
+                    Join in on a journey to memories
+                </Navbar.Text>}
+                 <Nav className="float-right">
+                    <Button variant="outline-light" onClick={this.goHome} >Home</Button>
+                    <Button variant="outline-light" onClick={this.handleSignOut}>Sign Out</Button>
+                    <Button variant="outline-light" onClick={this.addStoryButton}>Add Story</Button>
+                    <Button variant="outline-light" onClick={this.handleGoToProfile}>Profile</Button>
+                    <Button variant="outline-light" onClick={this.handleGoToMap}>My Map</Button>
+                    <Button variant="outline-light" onClick={this.handleGoToView}>My Journal</Button>
+                    <Button variant="outline-light" onClick={this.handleGoToAlbum}>My Album</Button>
+                </Nav>  
+                   
             </div>
+            </Navbar>
         )
     }
 }

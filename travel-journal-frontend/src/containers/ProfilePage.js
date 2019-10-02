@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import Header from './Header'
 import Posts from '../components/Posts'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Form from 'react-bootstrap/Form'
+
+
+
+
 
 
  class ProfilePage extends Component {
@@ -72,9 +80,9 @@ import Posts from '../components/Posts'
         usersChapters = this.props.chapters.map((chapter) => {
             
             if (chapter.user.id === this.props.user.id) {
-                return <li>
+                return <ListGroup.Item as="li" >
                     <Posts handleUploadToChapters={this.props.handleUploadToChapters} handleFileAddedToChapters={this.props.handleFileAddedToChapters} editChapter={this.props.editChapter} deleteChapter={this.props.deleteChapter}key={chapter.id} handleClickedChapter={this.props.handleClickedChapter} {...chapter}/>
-                    </li>
+                    </ListGroup.Item >
             }
         }) 
     }   
@@ -84,7 +92,7 @@ import Posts from '../components/Posts'
    console.log(this.props.newUser);
    
     return (
-        <div className="Profile-Container">
+        <div className="container">
             <Header 
             clearUser={this.props.clearUser}
             addStoryButton={this.props.addStoryButton}
@@ -102,41 +110,60 @@ import Posts from '../components/Posts'
           Please fill out your Profile
       </strong>
 
-      <form onSubmit={this.handleSubmittedUpdateForm}>
-        <input onChange={this.props.handleFileAdded} type="file" />
+      <Form onSubmit={this.handleSubmittedUpdateForm}>
+        <Form.Control onChange={this.props.handleFileAdded} type="file" />
         <br></br>
         <button onClick={this.props.handleUpload}>Upload</button>
         <br></br>
-          <input placeholder="first_name" name="first_name" value={this.state.first_name} onChange={this.handleChangeOnEdit} />
+        <Form.Label>First Name</Form.Label>
+          <Form.Control placeholder="first_name" name="first_name" value={this.state.first_name} onChange={this.handleChangeOnEdit} />
           <br></br>
-          <input placeholder="last_name" name="last_name" value={this.state.last_name} onChange={this.handleChangeOnEdit} />
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control placeholder="last_name" name="last_name" value={this.state.last_name} onChange={this.handleChangeOnEdit} />
           <br></br>
-          <input placeholder="locations_traveled" name="locations_traveled" value={this.state.locations_traveled} onChange={this.handleChangeOnEdit} />
+          <Form.Label>Been There!</Form.Label>
+          <Form.Control placeholder="locations_traveled" name="locations_traveled" value={this.state.locations_traveled} onChange={this.handleChangeOnEdit} />
           <br></br>
-          <input placeholder="bio" name="bio" value={this.state.bio} onChange={this.handleChangeOnEdit} />
+          <Form.Label>Bio</Form.Label>
+          <Form.Control placeholder="bio" name="bio" value={this.state.bio} onChange={this.handleChangeOnEdit} />
           <br></br>
-          <input placeholder="email" name="email" value={this.state.email} onChange={this.handleChangeOnEdit} />
+          <Form.Label>Email address</Form.Label>
+          <Form.Control placeholder="email" name="email" value={this.state.email} onChange={this.handleChangeOnEdit} />
           <br></br>
           
           <br></br>
-          <input className="originalButton" type="submit"/>
-      </form>
+          <Form.Control className="originalButton" type="submit"/>
+      </Form>
       </div>
       : 
       <div > 
       
-      <ul className="usersChapters">
+      <ListGroup as="ul" className="float-right">
        { usersChapters}
-      </ul>
-      <div className="profile">
-            <img src={this.props.user.url}/>
-            <h1>{this.props.user.first_name} {this.props.user.last_name} </h1>
-            <h1>{this.props.user.email}</h1>
-            <h1>{this.props.user.locations_traveled}</h1>
-            <h1>{this.props.user.bio}</h1>
-            <button className="originalButton" onClick={this.editProfileClicked}>Edit Profile</button>
+      </ListGroup>
+      <Card style={{ width: '18rem'}}>
+          <Card.Img variant="top" src={this.props.user.url} />
+          <Card.Body>
+           <Card.Title>{this.props.user.first_name} {this.props.user.last_name}</Card.Title>
+            <Card.Text>
+                <Card.Title>Bio:</Card.Title>
+            {this.props.user.bio}
+            </Card.Text>
+            <Card.Text>
+            <Card.Title>Email:</Card.Title>
+
+            {this.props.user.email}
+            </Card.Text>
+            <Card.Text>
+            <Card.Title>Been there!</Card.Title>
+
+            {this.props.user.locations_traveled}
+            </Card.Text>
+            <Button variant="dark" onClick={this.editProfileClicked}>Edit Profile</Button>
+          </Card.Body>
             
-            </div>
+            
+            </Card>
       </div>
             
         }

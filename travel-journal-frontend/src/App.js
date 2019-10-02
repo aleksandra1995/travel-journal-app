@@ -1,5 +1,7 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
+import './App2.css';
+
 import { Switch, Route, withRouter } from 'react-router-dom'
 import Header from './containers/Header'
 import HomePage from './containers/HomePage'
