@@ -46,10 +46,7 @@ class PostContainer extends Component {
    }
 
    editPage = (pageInfo) => {
-     
     this.setState({editPageClicked: !this.state.editPageClicked, currentPage: pageInfo})
-  
-    
   }
 
   handleOnChangePageEdit = (e) => {
@@ -75,17 +72,12 @@ class PostContainer extends Component {
     }).then(resp => resp.json())
     .then(page => {
       this.setState({editPageClicked: !this.state.editPageClicked})
-      this.props.updatePageStateAfterEdit(page)
-    }
-    )
+      this.props.updatePageStateAfterEdit(page)})
     }
 
     handleFileAdded = (e) => {
-  
-  
       if (e.target.files[0]) {
-          this.setState({image: e.target.files[0]})
-      }
+          this.setState({image: e.target.files[0]})}
     }
     
     handleUpload = (e) => {
@@ -109,63 +101,49 @@ class PostContainer extends Component {
               })
       
             }).then(resp => resp.json())   
-            .then(data => this.setState({currentPage: data
-  
-            }))           
+            .then(data => this.setState({currentPage: data}))           
             })
         })
       }
-      
     }
-
- 
- 
-  
-  
 
     render() {
       const orderedPages = this.props.currentBook.pages.sort((a,b) => {
         return a.id - b.id
       })
       
-       let indPage = orderedPages.slice(this.state.bookClicked, this.state.bookClicked + 1)
+      let indPage = orderedPages.slice(this.state.bookClicked, this.state.bookClicked + 1)
 
+      const pages = indPage.map(page => {
+        return <Page currentPage={this.state.currentPage} editPage = {this.editPage} deletePage = {this.props.deletePage} key={page.id} {...page} />
+      })
 
-
-        const pages = indPage.map(page => {
-            return <Page currentPage={this.state.currentPage} editPage = {this.editPage} deletePage = {this.props.deletePage} key={page.id} {...page} />
-            
-        })
-        let chapters
+      let chapters
         if (this.props.user.chapters) {
            chapters = this.props.user.chapters.map(chapter => {
             return <li 
             onClick={() => this.clickedChapterOnViewPage(chapter)} className="indChap">
-  
               {chapter.location}
               {chapter.date}
               <button className="headeroriginalButton" onClick={() => this.props.deleteChapter(chapter)}>Delete</button>
-              {/* <button>Edit</button> */}
-
             </li>
-            
           })
-        }
+      }
 
         
-        return (
+  return (
     <div>
             
-                <Header 
-                user={this.props.user}
-                clearUser={this.props.clearUser} addStoryButton={this.props.addStoryButton}/>
+      <Header 
+        user={this.props.user}
+        clearUser={this.props.clearUser} addStoryButton={this.props.addStoryButton}
+      />
       <div class="container">
         <div className="listedChapters">
-        Chapters:
-      <ul >
-      {chapters}
-      </ul>
-
+          Chapters:
+          <ul >
+          {chapters}
+          </ul>
         </div>
 
         <div class="book-wrapper">
@@ -174,7 +152,6 @@ class PostContainer extends Component {
           </div>
             <div onMouseMove={this.setCoordinates} onClick={this.flipPage} class="pages-container">
               <div class="pages">
-
             </div>
               <div className="leftPage">
           <div class="pages-content">
@@ -187,11 +164,8 @@ class PostContainer extends Component {
               </h3>
               <img className="chapImg" src={this.props.currentBook.url}/>
             </div>
-            
-              
             <div class="content-inner">
             {this.state.editPageClicked ?
-
             <form onSubmit={this.handleSubmittedEditPage}>
               <input onChange={this.handleFileAdded} type="file" />
               <button onClick={this.handleUpload}>Upload</button>
@@ -203,28 +177,17 @@ class PostContainer extends Component {
               <br></br>
               <input type="submit" />
             </form>
-            :
-            
-              pages
-            }
+            : pages}
             </div>
           </div>
-
         </div>
       </div>
     </div>
-  
-
-
+  </div>
 </div>
-             
-               
-            </div>
-        )
+)
     }
 }
-
-
 
 
 export default PostContainer

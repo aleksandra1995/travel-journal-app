@@ -72,12 +72,12 @@ class Album extends Component {
     render() {
 
         const albumFiles = this.state.albums.map(album => {
-            console.log(album.name);
-            if (album.name === "photo") {
-                return <img className="album-pics"  src={album.url}/>
-            }else if (album.name === "video") {
-                return <video className="album-pics" src={album.url} controls />
-                
+            if (this.props.user.id === album.user.id) {
+                if (album.name === "photo") {
+                    return <img className="album-pics"  src={album.url}/>
+                }else if (album.name === "video") {
+                    return <video className="album-pics" src={album.url} controls />   
+                }
             }
             
         })

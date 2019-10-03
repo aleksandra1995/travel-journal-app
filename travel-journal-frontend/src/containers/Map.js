@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
 import Header from './Header'
-import Pin from '../img/pin.png'
+
 
 
  class Map extends Component {
      state = {
          pins: []
-         
      }
 
      componentDidMount() {
          fetch('http://localhost:3000/pins')
          .then(resp => resp.json())
-         .then(pins => this.setState({pins})
-         )
+         .then(pins => this.setState({pins}))
      }
      
 
@@ -34,9 +32,7 @@ import Pin from '../img/pin.png'
     })
     .then(resp => resp.json())
     .then(pin => this.setState({
-        pins: [...this.state.pins, pin]
-    })
-    )
+        pins: [...this.state.pins, pin]}))
     }
 
    
