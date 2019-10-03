@@ -48,7 +48,7 @@ import Posts from '../components/Posts'
         
         
         this.props.editProfile(this.state)
-        this.setState({editProfileClicked: !this.state.editProfileClicked})
+        this.setState({editProfileClicked: false})
     }
 
     // onChange = (e) => {
