@@ -58,7 +58,7 @@ font-size: .5em;
   margin-left: 5%; 
   margin-top: 3em;
   margin-bottom: 3em;
-  font-size: 1em;
+  font-size: .5em;
 
 }
 
@@ -92,6 +92,7 @@ body {
   margin: 2% auto;
   width: 50%;
   height: 100%;
+  opacity: .8;
 }
 
 .book-wrapper2 {
@@ -99,6 +100,8 @@ body {
   margin: 2% auto;
   width: 50%;
   height: 100%;
+  opacity: .8;
+
 }
 
 .book-cover {
@@ -151,7 +154,7 @@ body {
 .content-inner {
     text-align: right;
     
-    margin-right: 50px;
+    margin-right: 60px;
     display: table-cell;
     vertical-align: top;
 }
@@ -226,12 +229,13 @@ text-align: center;
 .indChap {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
   margin-bottom: 1em;
-  font-size: .8em;
+  font-size: .6em;
+  overflow: scroll;
 }
 
 .chapterInfo {
   float: left;
-  font-size: 1.5em;
+  font-size: .8em;
 }
 
 .map {

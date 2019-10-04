@@ -88,7 +88,7 @@ import Posts from '../components/Posts'
                         { usersChapters}
                     </ul>
                     <div className="profile">
-                        <img src={this.props.user.url}/>
+                        <img alt="Image"src={this.props.user.url}/>
                         <h1>{this.props.user.first_name} {this.props.user.last_name} </h1>
                         <h1>{this.props.user.email}</h1>
                         <h1>{this.props.user.locations_traveled}</h1>
