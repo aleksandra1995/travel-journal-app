@@ -9,7 +9,7 @@
   height: 20vh;
   padding-top: 2.5%;
   margin-left: 3em;
-  margin-top: 3em;  
+  margin-top: 3em;
   font-size: 1em;
 }
 
@@ -55,7 +55,7 @@ font-size: .5em;
   height: 20vh;
   padding-top: 2em;
   margin-right: 5%;
-  margin-left: 5%; 
+  margin-left: 5%;
   margin-top: 3em;
   margin-bottom: 3em;
   font-size: .5em;
@@ -76,7 +76,7 @@ img {
 }
 body {
     background:  linear-gradient(
-      rgba(255, 255, 255, 0.9), 
+      rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)), url(https://s-media-cache-ak0.pinimg.com/originals/30/b3/a9/30b3a9b27032a6b9c1d7a69d2400fb9e.jpg);
   font-family: 'Indie Flower';
 }
@@ -153,7 +153,7 @@ body {
 
 .content-inner {
     text-align: right;
-    
+
     margin-right: 60px;
     display: table-cell;
     vertical-align: top;
@@ -162,7 +162,7 @@ body {
 .content-inner2 {
   padding-top: 7em;
   text-align: right;
-    
+
     margin-right: 50px;
     display: table-cell;
     vertical-align: top;
@@ -171,7 +171,7 @@ body {
 
 .book-wrapper {
    user-select: none;
-  
+
 }
 
 
@@ -213,14 +213,14 @@ text-align: center;
   height: 100%;
   width: 40%;
   padding-top: 4em;
-  
-  
+
+
 }
 
 .listedChapters {
-  
+
   float: right;
-  
+
   font-size: 3em;
   margin-right: 5%;
   width: 25%;
@@ -235,7 +235,8 @@ text-align: center;
 
 .chapterInfo {
   float: left;
-  font-size: .8em;
+  padding-left: 50%;
+  font-size: 1.3em;
 }
 
 .map {
@@ -264,7 +265,7 @@ font-size: 40px;
   background-color: #FBEEFB;
   font-size: 40%;
   margin-right: 5%;
-  
+
 }
 
 
@@ -300,7 +301,7 @@ font-size: .1em;
 }
 
 .pages-content img {
-  
+
   width: 10em;
   filter: drop-shadow(15px 5px 5px #494338);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
@@ -320,7 +321,7 @@ font-size: .1em;
   width: 1%;
   position: absolute;
 
-  
+
 
 
 }
@@ -368,14 +369,27 @@ font-size: .1em;
 .addPage {
   padding-top: 50%;
   font-size: 1em;
-  
+
 }
 
 .album-pics {
   width: 20em;
   height: 18em;
   padding-right: 1em;
-  
+
+}
+.title {
+  font-size: 1em;
 }
 
+.profileButton {
+  padding-top: 20%;
+  float: right;
+  padding-right: 20%;
+  font-size: 2em;
+}
+
+.profileChapters {
+  font-size: 2em;
+}
 }

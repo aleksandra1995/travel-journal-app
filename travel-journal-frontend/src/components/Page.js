@@ -13,11 +13,11 @@ class Page extends Component {
     }
 
     render() {
-        
+
         return (
             <div className="indPageContent">
                 <img src={this.props.url}/>
-                <h1>{this.props.title}</h1>
+                <h1 className="title">{this.props.title}</h1>
               <p>{this.props.content}</p>
               <button onClick={this.handleEdit} className="onPageButton">Edit</button>
               <button onClick={this.handleDelete} className="onPageButton">Delete</button>

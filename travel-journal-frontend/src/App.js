@@ -43,7 +43,7 @@ class App extends React.Component {
         }
       }).then(resp => resp.json())
         .then( user => {this.setState({user})
-      }) 
+      })
     }
 
     fetch('http://localhost:3000/chapters')
@@ -62,7 +62,7 @@ handleUploadToChapters = (e) => {
   const {imageChapter} = this.state
   if (imageChapter) {
     const uploadTask = storage.ref(`images/${imageChapter.name}`).put(imageChapter)
-    uploadTask.on(`state_changed`, 
+    uploadTask.on(`state_changed`,
     () => {},
     () => {},
     () => {
@@ -72,7 +72,7 @@ handleUploadToChapters = (e) => {
         alert("Upload Successfull")
     })
   }else(alert("Please Choose a Photo First"))
-  
+
 }
 
 handleFileAdded = (e) => {
@@ -84,11 +84,11 @@ handleUpload = (e) => {
   const {image} = this.state
   if (image) {
     const uploadTask = storage.ref(`images/${image.name}`).put(image)
-    uploadTask.on(`state_changed`, 
+    uploadTask.on(`state_changed`,
     () => {},
     () => {},
     () => {
-      
+
         storage.ref('images').child(image.name).getDownloadURL().then(url => {
             this.setState({url})
             fetch(`http://localhost:3000/users/${this.state.user.id}`, {
@@ -103,7 +103,7 @@ handleUpload = (e) => {
               .then(data => this.setState({user: {...this.state.user, url: data.url }}))
               alert("Upload Successfull")})})
   }else(alert("Please Choose a Photo First"))
-  
+
 }
 
 logUserIn = (userInfo) => {
@@ -121,7 +121,7 @@ logUserIn = (userInfo) => {
   .then(resp => resp.json())
   .then(data => this.data(data)
   )
-  
+
 }
 
 data = (data) => {
@@ -185,7 +185,7 @@ createNewChapter = (chapterInfo) => {
   }).then(resp => resp.json()
   )
   .then(data => {
-    this.setState({newChapterCreated: !this.state.newChapterCreated, currentBook: data, chapters:[...this.state.chapters, data], 
+    this.setState({newChapterCreated: !this.state.newChapterCreated, currentBook: data, chapters:[...this.state.chapters, data],
       user: {...this.state.user, chapters: [...this.state.user.chapters, data]}})})
 }
 
@@ -204,13 +204,13 @@ createNewPage = (pageInfo) => {
       user_id: this.state.user.id,
       chapter_id: this.state.currentBook.id,
       url: pageInfo.urlPage
-    
+
     })
   }).then(resp => resp.json())
     .then(data => {
       this.setState({
-        currentBook: {...this.state.currentBook, 
-          pages: [...this.state.currentBook.pages, {id: data.id, title: data.title, date: data.date, content: data.content}]}
+        currentBook: {...this.state.currentBook,
+          pages: [...this.state.currentBook.pages, {id: data.id, title: data.title, date: data.date, content: data.content, url: data.url}]}
       })
     this.props.history.push('/view')
 })
@@ -218,7 +218,7 @@ createNewPage = (pageInfo) => {
 
 
 handleClickedChapterFromProfile = (chapterInfo) => {
-  this.setState({newChapterCreated: !this.state.newChapterCreated, currentBook: chapterInfo}) 
+  this.setState({newChapterCreated: !this.state.newChapterCreated, currentBook: chapterInfo})
 }
 
 editProfile = (editInfo) => {
@@ -263,7 +263,7 @@ deleteChapter = (chapter) => {
   fetch(`http://localhost:3000/chapters/${chapter.id}`, {
     method: "DELETE"
   })
-  const leftoverUserChapters = this.state.user.chapters.filter(chap=> {    
+  const leftoverUserChapters = this.state.user.chapters.filter(chap=> {
     return chapter !== chap
   })
   this.setState({ user: {...this.state.user, chapters: leftoverUserChapters}})
@@ -278,12 +278,12 @@ clearUser = () => {
 }
 
   render() {
- 
+ console.log(this.state.chapters);
   return (
     <Switch >
-      <Route 
-      exact path={'/'} 
-      render={routerProps => <HomePage 
+      <Route
+      exact path={'/'}
+      render={routerProps => <HomePage
         countries={this.state.countries}
         user={this.state.user}
         clearUser={this.clearUser}
@@ -293,8 +293,8 @@ clearUser = () => {
         signUserUp={this.signUserUp}
         {...routerProps}/>}
        />
-       <Route 
-      exact path={'/profile'} 
+       <Route
+      exact path={'/profile'}
       render={routerProps => <ProfilePage
         newUser={this.state.newUser}
         handleUploadToChapters={this.handleUploadToChapters}
@@ -329,7 +329,7 @@ clearUser = () => {
        />
 
      <Route path={'/view'}
-      render={routerProps => <PostContainer 
+      render={routerProps => <PostContainer
       handleUploadToChapters={this.handleUploadToChapters}
       handleFileAddedToChapters={this.handleFileAddedToChapters}
       editChapter={this.editChapter}
@@ -343,7 +343,7 @@ clearUser = () => {
       currentBook={this.state.currentBook}
       chapters={this.state.chapters}
       {...routerProps}/>}
-      /> 
+      />
       <Route path={'/map'}
       render={routerProps => <Map
       clearUser={this.clearUser}
@@ -351,7 +351,7 @@ clearUser = () => {
       {...routerProps}/>}
       />
       <Route path={'/album'}
-      render={routerProps => <Album 
+      render={routerProps => <Album
       {...routerProps}
       clearUser={this.clearUser}
       user={this.state.user}/>}/>

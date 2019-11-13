@@ -9,7 +9,7 @@ import {storage} from '../firebase'
 
 
 class PostContainer extends Component {
-    
+
    state = {
        bookClicked: 0,
        xCoordinates: 0,
@@ -25,7 +25,7 @@ class PostContainer extends Component {
    setCoordinates = (e) => {
     this.setState({
       xCoordinates: e.screenX
-    }) 
+    })
    }
 
    flipPage = () => {
@@ -33,7 +33,7 @@ class PostContainer extends Component {
         this.setState({
            bookClicked: this.state.bookClicked - 1
        })
-     } else if (this.state.xCoordinates > 165 ) { 
+     } else if (this.state.xCoordinates > 165 ) {
         this.setState({
            bookClicked: this.state.bookClicked + 1
        })
@@ -54,7 +54,7 @@ class PostContainer extends Component {
       [e.target.name]: e.target.value
     })
   }
-  
+
   handleSubmittedEditPage = (e) => {
     e.preventDefault()
     fetch(`http://localhost:3000/pages/${this.state.currentPage.id}`, {
@@ -79,13 +79,13 @@ class PostContainer extends Component {
       if (e.target.files[0]) {
           this.setState({image: e.target.files[0]})}
     }
-    
+
     handleUpload = (e) => {
       e.preventDefault()
       const {image} = this.state
       if (image) {
         const uploadTask = storage.ref(`images/${image.name}`).put(image)
-        uploadTask.on(`state_changed`, 
+        uploadTask.on(`state_changed`,
         () => {},
         () => {},
         () => {
@@ -99,9 +99,9 @@ class PostContainer extends Component {
               body: JSON.stringify({
                 url: url
               })
-      
-            }).then(resp => resp.json())   
-            .then(data => this.setState({currentPage: data}))           
+
+            }).then(resp => resp.json())
+            .then(data => this.setState({currentPage: data}))
             })
         })
       }
@@ -111,7 +111,7 @@ class PostContainer extends Component {
       const orderedPages = this.props.currentBook.pages.sort((a,b) => {
         return a.id - b.id
       })
-      
+
       let indPage = orderedPages.slice(this.state.bookClicked, this.state.bookClicked + 1)
 
       const pages = indPage.map(page => {
@@ -121,20 +121,21 @@ class PostContainer extends Component {
       let chapters
         if (this.props.user.chapters) {
            chapters = this.props.user.chapters.map(chapter => {
-            return <li 
+            return <li
             onClick={() => this.clickedChapterOnViewPage(chapter)} className="indChap">
               {chapter.location}
+              <br/>
               {chapter.date}
               <button className="headeroriginalButton" onClick={() => this.props.deleteChapter(chapter)}>Delete</button>
             </li>
           })
       }
 
-        
+
   return (
     <div>
-            
-      <Header 
+
+      <Header
         user={this.props.user}
         clearUser={this.props.clearUser} addStoryButton={this.props.addStoryButton}
       />

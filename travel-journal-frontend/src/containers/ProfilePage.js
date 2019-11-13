@@ -32,7 +32,8 @@ import Posts from '../components/Posts'
         this.setState({editProfileClicked: false})
     }
 
-    render() {  
+    render() {
+      console.log(this.props.addStoryButton);
 
     let usersChapters
 
@@ -41,22 +42,22 @@ import Posts from '../components/Posts'
             if (chapter.user.id === this.props.user.id) {
                 return <li><Posts handleUploadToChapters={this.props.handleUploadToChapters} handleFileAddedToChapters={this.props.handleFileAddedToChapters} editChapter={this.props.editChapter} deleteChapter={this.props.deleteChapter}key={chapter.id} handleClickedChapter={this.props.handleClickedChapter} {...chapter}/></li>
             }
-        }) 
-    }   
+        })
+    }
 
     return (
         <div className="Profile-Container">
-            <Header 
+            <Header
             clearUser={this.props.clearUser}
             addStoryButton={this.props.addStoryButton}
             user={this.props.user}/>
             <div className="profileDiv">
-        
+
                 <div>
-   
-           
+
+
                     { this.state.editProfileClicked || this.props.newUser ?
-                    <div className="editProfile"> 
+                    <div className="editProfile">
                     <strong className="text">
                         Please fill out your Profile
                     </strong>
@@ -76,17 +77,22 @@ import Posts from '../components/Posts'
                         <br/>
                         <input placeholder="email" name="email" value={this.state.email} onChange={this.handleChangeOnEdit} />
                         <br/>
-                        
+
                         <br/>
                         <input className="originalButton" type="submit"/>
                     </form>
                  </div>
-      : 
-                <div > 
-      
-                    <ul className="usersChapters">
-                        { usersChapters}
-                    </ul>
+      :
+                <div >
+                      {this.props.user.chapters ?
+                    <ul className="usersChapters profileChapters">
+                        {usersChapters}
+                    </ul> :
+                    <div className="profileButton">
+                    <button onClick={this.props.addStoryButton} className=" originalButton"> Click here to begin writing in your Journal!</button>
+                  </div>}
+
+
                     <div className="profile">
                         <img alt="Image"src={this.props.user.url}/>
                         <h1>{this.props.user.first_name} {this.props.user.last_name} </h1>
@@ -94,15 +100,15 @@ import Posts from '../components/Posts'
                         <h1>{this.props.user.locations_traveled}</h1>
                         <h1>{this.props.user.bio}</h1>
                         <button className="originalButton" onClick={this.editProfileClicked}>Edit Profile</button>
-                        
+
                 </div>
             </div>
-            
+
             }
             </div>
         </div>
     </div>
-        
+
         )
     }
 }

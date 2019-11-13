@@ -11,7 +11,7 @@ class Posts extends Component {
         this.setState({
             chapterEditClicked: !this.state.chapterEditClicked
         })
-        
+
 
     }
 
@@ -28,7 +28,7 @@ class Posts extends Component {
     }
 
     render() {
-        
+
         return (
             <div onClick={() => this.props.handleClickedChapter(this.props)} className="pageCard">
             {this.state.chapterEditClicked ?
@@ -53,7 +53,7 @@ class Posts extends Component {
     }
 
 
-    
+
 }
 
 export default Posts
